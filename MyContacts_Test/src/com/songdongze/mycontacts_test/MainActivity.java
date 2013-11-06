@@ -3,7 +3,7 @@ package com.songdongze.mycontacts_test;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-
+//this is a test! uncommit
 public class MainActivity extends Activity {
 
 	@Override
