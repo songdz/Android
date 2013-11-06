@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/imageView_ContactPhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="22dp"
+        android:src="@android:drawable/ic_menu_edit"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textView_Name"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView_ContactPhoto"
+        android:layout_marginRight="49dp"
+        android:gravity="center"
+        android:text="@string/contactName" />
+
+    <TextView
+        android:id="@+id/textView_Company"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/imageView_ContactPhoto"
+        android:layout_alignLeft="@+id/textView_Name"
+        android:gravity="center"
+        android:text="@string/contactCompany" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView_ContactPhoto"
+        android:orientation="vertical" >
+
+        <TableRow
+            android:id="@+id/tableRow_PrivatePhone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView_PrivatePhone"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="@string/privatePhone" />
+
+            <TextView
+                android:id="@+id/textView_PrivatePhone2"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow_CompanyPhone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView_CompanyPhone"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="@string/companyPhone" />
+
+            <TextView
+                android:id="@+id/textView_CompanyPhone2"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow_Email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView_Email"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="@string/eMail" />
+
+            <TextView
+                android:id="@+id/textView_Email2"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow_QQ"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView_QQ"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="@string/qq" />
+
+            <TextView
+                android:id="@+id/textView_QQ2"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"/>
+        </TableRow>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton_EditContact"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@android:drawable/ic_menu_edit"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/imageButton_DeleteContact"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/ic_menu_delete"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>
