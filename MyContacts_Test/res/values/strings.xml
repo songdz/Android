@@ -12,5 +12,10 @@
     <string name="eMail">电子邮箱</string>
 	<string name="ok">确定</string>
     <string name="cancel">取消</string>
-    
+    <string name="empty_contacts">无联系人信息</string>
+    <string name="add_contact">添加联系人</string>
+    <string name="exit">退出</string>
+    <string name="contactview">联系人信息</string>
+    <string name="deletecontact">删除联系人</string>
+    <string name="contactedit">编辑联系人</string>
 </resources>

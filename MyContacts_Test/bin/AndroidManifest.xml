@@ -13,14 +13,32 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+      <!--    <provider android:name=".ContactsProvider" android:authorities="com.songdongze.mycontacts_test.provider.ContactsProvider" android:exported="true" />
+       -->
         <activity
             android:name="com.songdongze.mycontacts_test.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.songdongze.mycontacts_test.ContactView"
+            android:label="@string/contactview" >
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.songdongze.mycontacts_test.category.ContactView" />
+            </intent-filter>           
+        </activity>
+        <activity android:name="com.songdongze.mycontacts_test.ContactEdit"
+            android:label="@string/contactedit" >
+            <intent-filter >
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.songdongze.mycontacts_test.category.ContactEdit" />
+            </intent-filter>           
         </activity>
     </application>
 

@@ -24,7 +24,7 @@
         android:layout_marginRight="49dp"
         android:inputType="textPersonName"
         android:gravity="center"
-        android:text="@string/contactName" />
+        android:hint="@string/contactName" />
 
     <EditText
         android:id="@+id/editText_Company"
@@ -34,7 +34,7 @@
         android:layout_alignLeft="@+id/editText_Name"
         android:inputType="text"
         android:gravity="center"
-        android:text="@string/contactCompany" />
+        android:hint="@string/contactCompany" />
 
     <LinearLayout
         android:layout_width="fill_parent"
