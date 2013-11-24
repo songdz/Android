@@ -14,13 +14,13 @@ public class DBHelper extends SQLiteOpenHelper {
 	
 	private static String DATABASE_CREATETABLE = "CREATE TABLE " + CONTACTS_TABLE 
 			+ " ("
-			+ ContactColumn._ID_COLUMN + " integer primary key autoincrement, "
-			+ ContactColumn.NAME + "text, "
-			+ ContactColumn.COMPANY + "text, "
-			+ ContactColumn.PRIVATEPHONE + "text, "
-			+ ContactColumn.COMPANYPHONE + "text, "
-			+ ContactColumn.EMAIL + "text, "
-			+ ContactColumn.QQ + "text, "
+			+ ContactColumn._ID + " integer primary key autoincrement, "
+			+ ContactColumn.NAME + " text, "
+			+ ContactColumn.COMPANY + " text, "
+			+ ContactColumn.PRIVATEPHONE + " text, "
+			+ ContactColumn.COMPANYPHONE + " text, "
+			+ ContactColumn.EMAIL + " text, "
+			+ ContactColumn.QQ + " text"
 			+ ");";
 	
 	

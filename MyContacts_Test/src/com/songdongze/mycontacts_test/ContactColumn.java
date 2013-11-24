@@ -31,17 +31,6 @@ public class ContactColumn implements BaseColumns {
 	public static final int QQ_COLUMN = 6;
 	
 	public static final String[] PROJECTION = {_ID, NAME, COMPANY, PRIVATEPHONE, COMPANYPHONE, EMAIL, QQ};
-
-	public ContactColumn() {
-		
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

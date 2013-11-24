@@ -18,4 +18,5 @@
     <string name="contactview">联系人信息</string>
     <string name="deletecontact">删除联系人</string>
     <string name="contactedit">编辑联系人</string>
+    <string name="nameNotEmpty">联系人姓名不能为空！</string>
 </resources>

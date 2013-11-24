@@ -1,35 +1,39 @@
 package com.songdongze.mycontacts_test;
 
-import java.util.ArrayList;
-
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.content.ContentUris;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity 
+//				implements LoaderManager.LoaderCallbacks<Cursor> 
+	{
 	
-	private ArrayList<String> item = getArrayList();
+//	private ArrayList<String> item = getArrayList();
 	private static final int ADDCONTACT = Menu.FIRST;
 	private static final int EXIT = Menu.FIRST + 1;
 	private static final int DELETECONTACT = Menu.FIRST + 2;
+	private SimpleCursorAdapter scAdapter;
 	
-	private ArrayList<String> getArrayList() {
+/*	private ArrayList<String> getArrayList() {
 		ArrayList<String> item = new ArrayList<String>();
 		item.add("aaa");
 		item.add("bbb");
 		item.add("ccc");
 		return item;
 	}
+	*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,28 @@ public class MainActivity extends ListActivity {
 		getListView().setTextFilterEnabled(true);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void setAdapter() {
-		setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, item));
+		Cursor cursor = managedQuery(ContactsProvider.CONTENT_URI, ContactColumn.PROJECTION, null, null, null);
+		scAdapter = new SimpleCursorAdapter(this, 
+					android.R.layout.simple_list_item_2, 
+					cursor, 
+					new String[] {ContactColumn.NAME, ContactColumn.PRIVATEPHONE}, 
+					new int[] {android.R.id.text1, android.R.id.text2 }
+					);
+
+		setListAdapter(scAdapter);
+		
+/*		scAdapter = new SimpleCursorAdapter(this, 
+				android.R.layout.simple_list_item_2, 
+				null, 
+				new String[] {ContactColumn.NAME, ContactColumn.PRIVATEPHONE}, 
+				new int[] {android.R.id.text1, android.R.id.text2 }
+				//,CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER}
+				);
+				getLoaderManager().initLoader(0, null, this);*/
+		
+		//setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, item));
 	}
 	
 	@Override
@@ -85,7 +109,13 @@ public class MainActivity extends ListActivity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
-		String name = (String)getListView().getAdapter().getItem(info.position);
+//		String name = (String)getListView().getAdapter().getItem(info.position);
+		Cursor cursor = (Cursor) getListAdapter().getItem(info.position);
+		if (cursor == null)
+		{
+			return;
+		}
+		String name = cursor.getString(1);
 		menu.setHeaderTitle(R.string.deletecontact);
 		menu.add(0, DELETECONTACT, 0, name + "?");
 	}
@@ -95,17 +125,40 @@ public class MainActivity extends ListActivity {
 
 		switch(item.getItemId()) {
 			case DELETECONTACT:
-				deleteRow(((AdapterContextMenuInfo)item.getMenuInfo()).position);
+				deleteRow(((AdapterContextMenuInfo)item.getMenuInfo()).id);
 				return true;
 		}
 		return false;
 	}
 
-	private void deleteRow(int position) {
-		item.remove(position);
+	private void deleteRow(long id) {
+/*		item.remove(id);
 		((BaseAdapter)getListAdapter()).notifyDataSetChanged();
-		getListView().invalidate();
+		getListView().invalidate();*/
+		Uri deleteIdUri = ContentUris.withAppendedId(ContactsProvider.CONTENT_URI, id);
+		getContentResolver().delete(deleteIdUri, null, null);
 	}
+
+
+/*	@Override
+	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		 return new CursorLoader(this, ContactsProvider.CONTENT_URI,
+                ContactColumn.PROJECTION, null, null, null);
+	}
+
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+		// TODO Auto-generated method stub
+		scAdapter.swapCursor(data);
+	}
+
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+		// TODO Auto-generated method stub
+		scAdapter.swapCursor(null);
+	}*/
 	
 	
 

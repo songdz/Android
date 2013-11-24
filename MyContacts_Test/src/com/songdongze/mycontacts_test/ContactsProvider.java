@@ -20,7 +20,7 @@ public class ContactsProvider extends ContentProvider {
 	private SQLiteDatabase contactsDB;
 	
 	public static final String AUTHORITY = "com.songdongze.mycontacts_test.provider.ContactsProvider";
-	public static final String CONTACTS_TABLE = "contacts";
+	public static final String CONTACTS_TABLE = DBHelper.CONTACTS_TABLE;
 	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + CONTACTS_TABLE);
 	
 	public static final int CONTACTS = 1;
@@ -43,7 +43,6 @@ public class ContactsProvider extends ContentProvider {
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
-		Log.e(TAG + " :query", "in Query");
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		qb.setTables(CONTACTS_TABLE);
 		
