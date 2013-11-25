@@ -2,6 +2,7 @@ package com.songdongze.mycontacts_test;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -55,12 +56,13 @@ public class ContactEdit extends Activity {
 					values.put(ContactColumn.EMAIL, email);
 					values.put(ContactColumn.QQ, qq);
 					getContentResolver().insert(ContactsProvider.CONTENT_URI, values);
+					finish();
 				}				
 			}
 		});
 		button_Cancel.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				
+				finish();
 			}
 		});
 	}
@@ -80,7 +82,6 @@ public class ContactEdit extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		return super.onOptionsItemSelected(item);
 	}
 	

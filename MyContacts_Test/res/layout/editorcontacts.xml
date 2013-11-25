@@ -18,7 +18,7 @@
     <EditText
         android:id="@+id/editText_Name"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/imageButton_ContactPhoto"
         android:layout_marginRight="49dp"
@@ -49,13 +49,13 @@
             <TextView
                 android:id="@+id/textView_PrivatePhone"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:text="@string/privatePhone"/>
             <EditText
                 android:id="@+id/editText_PrivatePhone"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:inputType="phone"/>   
         </TableRow>
@@ -67,13 +67,13 @@
             <TextView
                 android:id="@+id/textView_CompanyPhone"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:text="@string/companyPhone"/>
             <EditText
                 android:id="@+id/editText_CompanyPhone"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:inputType="phone"/>   
         </TableRow>
@@ -85,13 +85,13 @@
             <TextView
                 android:id="@+id/textView_Email"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:text="@string/eMail"/>
             <EditText
                 android:id="@+id/editText_Email"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:inputType="textEmailAddress"/>   
         </TableRow>
@@ -103,13 +103,13 @@
             <TextView
                 android:id="@+id/textView_QQ"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:text="@string/qq"/>
             <EditText
                 android:id="@+id/editText_QQ"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:inputType="number"/>   
         </TableRow>

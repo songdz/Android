@@ -91,7 +91,7 @@ public class ContactsProvider extends ContentProvider {
 		ContentValues valuesCopy;
 		if(values != null) {
 			valuesCopy = new ContentValues(values);
-			Log.e(TAG + " insert", "initialVaules is not null");
+			Log.d(TAG + " insert", "initialVaules is not null");
 		}
 		else {
 			valuesCopy = new ContentValues();
@@ -121,12 +121,12 @@ public class ContactsProvider extends ContentProvider {
 		{
 			values.put(ContactColumn.QQ, "");
 		}
-		Log.e(TAG + " insert", valuesCopy.toString());
+		Log.d(TAG + " insert", valuesCopy.toString());
 		long rowId = contactsDB.insert(CONTACTS_TABLE, null, valuesCopy);
 		if(rowId > 0) {
 			Uri noteUri = ContentUris.withAppendedId(CONTENT_URI, rowId);
 			getContext().getContentResolver().notifyChange(noteUri, null);
-			Log.e(TAG + " insert", noteUri.toString());
+			Log.d(TAG + " insert", noteUri.toString());
 			return noteUri;
 		}
 		throw new SQLException("Failed to insert row into " + uri);

@@ -30,14 +30,22 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="com.songdongze.mycontacts_test.category.ContactView" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.songdongze.mycontacts_test" />
             </intent-filter>           
         </activity>
         <activity android:name="com.songdongze.mycontacts_test.ContactEdit"
             android:label="@string/contactedit" >
             <intent-filter >
+                <action android:name="android.intent.action.INSERT" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.songdongze.mycontacts_test.category.ContactInsert" />
+                <data android:mimeType="vnd.android.cursor.dir/vnd.songdongze.mycontacts_test" />
+            </intent-filter>
+            <intent-filter >
                 <action android:name="android.intent.action.EDIT" />
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="com.songdongze.mycontacts_test.category.ContactEdit" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.songdongze.mycontacts_test" />
             </intent-filter>           
         </activity>
     </application>

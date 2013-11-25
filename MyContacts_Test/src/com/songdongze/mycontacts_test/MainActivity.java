@@ -6,6 +6,7 @@ import android.app.ListActivity;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -83,12 +84,12 @@ public class MainActivity extends ListActivity
 		
 		switch(item.getItemId()) {
 			case ADDCONTACT: Intent intent = new Intent();
-				intent.setAction(Intent.ACTION_EDIT);
-				intent.addCategory("com.songdongze.mycontacts_test.category.ContactEdit");
+				intent.setAction(Intent.ACTION_INSERT);
+				intent.addCategory("com.songdongze.mycontacts_test.category.ContactInsert");
 				startActivity(intent);
 				return true;
 			case EXIT:
-				this.finish();
+				finish();
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -98,11 +99,19 @@ public class MainActivity extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		
 		Toast.makeText(getApplicationContext(), "position :" + position + "id :" + id, Toast.LENGTH_SHORT).show();
-		
+		Uri uri = ContentUris.withAppendedId(ContactsProvider.CONTENT_URI, id);
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
+		intent.setData(uri);
 		intent.addCategory("com.songdongze.mycontacts_test.category.ContactView");
 		startActivity(intent);
+		/*Log.d("startActivity", "Activity MainActivity");
+		try {
+			Thread.sleep(5000);
+			Log.d("startActivity", "Activity MainActivity in Sleep");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}*/
 	}
 
 	@Override
@@ -160,6 +169,28 @@ public class MainActivity extends ListActivity
 		scAdapter.swapCursor(null);
 	}*/
 	
-	
+/*	@Override
+	protected void onPause() {
+		super.onPause();
+		try {
+			Log.d("startActivity", "onPause");
+			Thread.sleep(5000);
+			Log.d("startActivity", "Activity MainActivity in onPause");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		try {
+			Log.d("startActivity", "onStop");
+			Thread.sleep(5000);
+			Log.d("startActivity", "Activity MainActivity in onStop");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}*/
 
 }

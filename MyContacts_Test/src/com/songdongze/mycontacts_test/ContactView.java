@@ -1,7 +1,10 @@
 package com.songdongze.mycontacts_test;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,12 +22,41 @@ public class ContactView extends Activity {
 	private TextView textView_Email2;
 	private TextView textView_QQ2;
 	
+	private Cursor mCursor;
+	private Uri mUri;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mUri = getIntent().getData();
 		setContentView(R.layout.viewuser);
+//Log.d("onCreate", "Activity ContactView");
 		findViews();
 		setOnClickMethods();
+		mCursor = managedQuery(mUri, ContactColumn.PROJECTION, null, null, null);
+        mCursor.moveToFirst();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+//Log.d("onResume", "Activity ContactView");
+		if (mCursor != null)
+		{
+			// 读取并显示联系人信息
+			mCursor.moveToFirst();
+			
+			textView_Name.setText(mCursor.getString(ContactColumn.NAME_COLUMN));
+			textView_Company.setText(mCursor.getString(ContactColumn.COMPANY_COLUMN));
+			textView_PrivatePhone2.setText(mCursor.getString(ContactColumn.PRIVATEPHONE_COLUMN));
+			textView_CompanyPhone2.setText(mCursor.getString(ContactColumn.COMPANYPHONE_COLUMN));
+			textView_Email2.setText(mCursor.getString(ContactColumn.EMAIL_COLUMN));
+			textView_QQ2.setText(mCursor.getString(ContactColumn.QQ_COLUMN));
+		}
+		else
+		{
+			setTitle("错误信息");
+		}
 	}
 
 	@Override
