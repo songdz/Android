@@ -3,6 +3,8 @@ package com.songdongze.mycontacts_test;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -55,7 +57,12 @@ public class ContactEdit extends Activity {
 					values.put(ContactColumn.COMPANYPHONE, companyPhone);
 					values.put(ContactColumn.EMAIL, email);
 					values.put(ContactColumn.QQ, qq);
-					getContentResolver().insert(ContactsProvider.CONTENT_URI, values);
+					String action = getIntent().getAction();
+					if(Intent.ACTION_INSERT.equals(action)) {
+						getContentResolver().insert(ContactsProvider.CONTENT_URI, values);
+					} else if(Intent.ACTION_EDIT.equals(action)) {
+						getContentResolver().update(getIntent().getData(), values, null, null);
+					}
 					finish();
 				}				
 			}
@@ -73,8 +80,31 @@ public class ContactEdit extends Activity {
 		setContentView(R.layout.editorcontacts);
 		findViews();
 		setOnClickedMethods();
+		if(Intent.ACTION_EDIT.equals(getIntent().getAction())) {
+			displayContact(getIntent().getData());
+		}
+		
 	}
 
+	
+	@SuppressWarnings("deprecation")
+	private void displayContact(Uri uri) {
+		Cursor cursor = managedQuery(uri, ContactColumn.PROJECTION, null, null, null);
+        if (cursor != null) {
+			// 读取并显示联系人信息
+			cursor.moveToFirst();			
+			editText_Name.setText(cursor.getString(ContactColumn.NAME_COLUMN));
+			editText_Company.setText(cursor.getString(ContactColumn.COMPANY_COLUMN));
+			editText_PrivatePhone.setText(cursor.getString(ContactColumn.PRIVATEPHONE_COLUMN));
+			editText_CompanyPhone.setText(cursor.getString(ContactColumn.COMPANYPHONE_COLUMN));
+			editText_Email.setText(cursor.getString(ContactColumn.EMAIL_COLUMN));
+			editText_QQ.setText(cursor.getString(ContactColumn.QQ_COLUMN));
+		}		
+        else {
+			setTitle("错误信息");
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return super.onCreateOptionsMenu(menu);

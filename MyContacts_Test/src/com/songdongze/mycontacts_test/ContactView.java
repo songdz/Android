@@ -1,10 +1,12 @@
 package com.songdongze.mycontacts_test;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,9 +24,10 @@ public class ContactView extends Activity {
 	private TextView textView_Email2;
 	private TextView textView_QQ2;
 	
-	private Cursor mCursor;
+	private Cursor cursor;
 	private Uri mUri;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,28 +36,26 @@ public class ContactView extends Activity {
 //Log.d("onCreate", "Activity ContactView");
 		findViews();
 		setOnClickMethods();
-		mCursor = managedQuery(mUri, ContactColumn.PROJECTION, null, null, null);
-        mCursor.moveToFirst();
+		cursor = managedQuery(mUri, ContactColumn.PROJECTION, null, null, null);
+        cursor.moveToFirst();
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 //Log.d("onResume", "Activity ContactView");
-		if (mCursor != null)
-		{
+		if (cursor != null)	{
 			// 读取并显示联系人信息
-			mCursor.moveToFirst();
+			cursor.moveToFirst();
 			
-			textView_Name.setText(mCursor.getString(ContactColumn.NAME_COLUMN));
-			textView_Company.setText(mCursor.getString(ContactColumn.COMPANY_COLUMN));
-			textView_PrivatePhone2.setText(mCursor.getString(ContactColumn.PRIVATEPHONE_COLUMN));
-			textView_CompanyPhone2.setText(mCursor.getString(ContactColumn.COMPANYPHONE_COLUMN));
-			textView_Email2.setText(mCursor.getString(ContactColumn.EMAIL_COLUMN));
-			textView_QQ2.setText(mCursor.getString(ContactColumn.QQ_COLUMN));
+			textView_Name.setText(cursor.getString(ContactColumn.NAME_COLUMN));
+			textView_Company.setText(cursor.getString(ContactColumn.COMPANY_COLUMN));
+			textView_PrivatePhone2.setText(cursor.getString(ContactColumn.PRIVATEPHONE_COLUMN));
+			textView_CompanyPhone2.setText(cursor.getString(ContactColumn.COMPANYPHONE_COLUMN));
+			textView_Email2.setText(cursor.getString(ContactColumn.EMAIL_COLUMN));
+			textView_QQ2.setText(cursor.getString(ContactColumn.QQ_COLUMN));
 		}
-		else
-		{
+		else {
 			setTitle("错误信息");
 		}
 	}
@@ -79,11 +80,30 @@ public class ContactView extends Activity {
 		imageButton_EditContact.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Toast.makeText(ContactView.this, "Edit Contact", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent();
+				intent.setAction(Intent.ACTION_EDIT);
+				intent.setData(getIntent().getData());
+				startActivity(intent);
 			}
 		});
 		imageButton_DeleteContact.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Toast.makeText(ContactView.this, "Delete Contact", Toast.LENGTH_SHORT).show();
+				new AlertDialog.Builder(ContactView.this)
+							   	.setTitle(R.string.deletecontact)
+							   	.setMessage(getText(R.string.deletecontact) + cursor.getString(ContactColumn.NAME_COLUMN) + " ?")
+							   	.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+								   public void onClick(DialogInterface dialog,
+										   int which) {
+									   getContentResolver().delete(mUri, null, null);
+									   finish();
+								}})
+								.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {					
+									public void onClick(DialogInterface dialog, int which) {
+										
+									}
+								})
+								.show();
 			}
 		});
 	}

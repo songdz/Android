@@ -76,6 +76,7 @@ public final class R {
         public static final int empty_contacts=0x7f05000b;
         public static final int exit=0x7f05000d;
         public static final int hello_world=0x7f050002;
+        public static final int mapinfo=0x7f050012;
         public static final int nameNotEmpty=0x7f050011;
         public static final int ok=0x7f050009;
         public static final int privatePhone=0x7f050005;

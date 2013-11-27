@@ -6,7 +6,6 @@ import android.app.ListActivity;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -85,7 +84,7 @@ public class MainActivity extends ListActivity
 		switch(item.getItemId()) {
 			case ADDCONTACT: Intent intent = new Intent();
 				intent.setAction(Intent.ACTION_INSERT);
-				intent.addCategory("com.songdongze.mycontacts_test.category.ContactInsert");
+				intent.setData(ContactsProvider.CONTENT_URI);
 				startActivity(intent);
 				return true;
 			case EXIT:
@@ -103,7 +102,6 @@ public class MainActivity extends ListActivity
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
 		intent.setData(uri);
-		intent.addCategory("com.songdongze.mycontacts_test.category.ContactView");
 		startActivity(intent);
 		/*Log.d("startActivity", "Activity MainActivity");
 		try {
@@ -124,9 +122,9 @@ public class MainActivity extends ListActivity
 		{
 			return;
 		}
-		String name = cursor.getString(1);
+		String name = cursor.getString(ContactColumn.NAME_COLUMN);
 		menu.setHeaderTitle(R.string.deletecontact);
-		menu.add(0, DELETECONTACT, 0, name + "?");
+		menu.add(0, DELETECONTACT, 0, " " + name + " ?");
 	}
 
 	@Override
